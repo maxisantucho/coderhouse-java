@@ -6,7 +6,7 @@ public class Main {
 
 		String mensaje;
 		
-		mensaje = "Hola mundo";
+		mensaje = "Mensaje de prueba";
 		
 		System.out.println(mensaje);
 
