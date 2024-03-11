@@ -4,11 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String mensaje;
+		Persona persona1 = new Persona("Maxi", "Santucho", 26);
 		
-		mensaje = "Hola mundo";
-		
-		System.out.println(mensaje);
+		System.out.println(persona1);
 
 	}
 
