@@ -281,6 +281,11 @@ public class Workshop1Application implements CommandLineRunner {
 		if(curso != null) {
 			System.out.println("El curso seleccionado es: " + curso.getTitulo()
 								+ " " + curso.getDescripcion());
+			List<Alumno> listaAlumnos = curso.getAlumnos();
+			System.out.println("Alumnos:");
+			for (Alumno alumno : listaAlumnos) {
+				System.out.println("- " + alumno.getNombre() + " " + alumno.getApellido());
+			}
 		} else {
 			System.out.println("El curso con ID " + curso.getId_curso() + " no fue encontrado");
 		}
