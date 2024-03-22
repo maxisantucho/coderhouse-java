@@ -47,6 +47,7 @@ public class Workshop1Application implements CommandLineRunner {
 							+ "6. Lista de todos los cursos\n"
 							+ "7. Agregar cursos\n"
 							+ "8. Buscar cursos por ID\n"
+							+ "9. Modificar curso por ID\n"
 							+ "0. Salir\n");
 					System.out.println("Ingresar opcion:");
 					if (entrada.hasNextInt()) {
@@ -81,6 +82,9 @@ public class Workshop1Application implements CommandLineRunner {
 						break;
 					case 8:
 						buscarCursoPorId();
+						break;
+					case 9:
+						modificarCursoPorId();
 						break;
 					case 0:
 						System.out.println("Saliendo del programa ...");
@@ -235,7 +239,7 @@ public class Workshop1Application implements CommandLineRunner {
 	public void eliminarAlumnoPorDNI() {
 		@SuppressWarnings("resource")
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Ingrese el DNI del alumno a editar:");
+		System.out.println("Ingrese el DNI del alumno a eliminar:");
 		int dni = entrada.nextInt();
 		Alumno alumno = alumnoRepository.findById(dni).orElse(null);
 		if(alumno != null) {
@@ -271,7 +275,7 @@ public class Workshop1Application implements CommandLineRunner {
 		cursoRepository.save(curso);
 		System.out.println("El curso " + curso.getTitulo() + " fue guardado exitosamente");
 	}
-	
+
 	public void buscarCursoPorId() {
 		@SuppressWarnings("resource")
 		Scanner entrada = new Scanner(System.in);
@@ -282,12 +286,51 @@ public class Workshop1Application implements CommandLineRunner {
 			System.out.println("El curso seleccionado es: " + curso.getTitulo()
 								+ " " + curso.getDescripcion());
 			List<Alumno> listaAlumnos = curso.getAlumnos();
-			System.out.println("Alumnos:");
+			System.out.println("Y sus alumnos son:");
 			for (Alumno alumno : listaAlumnos) {
 				System.out.println("- " + alumno.getNombre() + " " + alumno.getApellido());
 			}
 		} else {
 			System.out.println("El curso con ID " + curso.getId_curso() + " no fue encontrado");
+		}
+	}
+	
+	public void modificarCursoPorId() {
+		@SuppressWarnings("resource")
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("Ingrese el ID del curso a editar:");
+		int id = entrada.nextInt();
+		Curso curso = cursoRepository.findById(id).orElse(null);
+		if(curso != null) {
+			System.out.println("El curso encontrado es: " + curso.getTitulo()
+								+ ", " + curso.getDescripcion());
+			System.out.println("Ingrese el titulo del curso nuevo:");
+			String nuevoTitulo = entrada.next();
+			curso.setTitulo(nuevoTitulo);
+			entrada.nextLine();
+			System.out.println("Ingrese la descripcion del cursos nuevo:");
+			String nuevaDescripcion = entrada.nextLine();
+			curso.setDescripcion(nuevaDescripcion);
+			cursoRepository.save(curso);
+			System.out.println("Curso modificado correctamente");
+			System.out.println("Curso nuevo: " + curso.getTitulo()
+								+ ", " + curso.getDescripcion());
+		} else {
+			System.out.println("No existe el curso.");
+		}
+	}
+
+	public void eliminarCursoPorId() {
+		@SuppressWarnings("resource")
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("Ingrese el ID del curso a eliminar:");
+		int id = entrada.nextInt();
+		Curso curso = cursoRepository.findById(id).orElse(null);
+		if(curso != null) {
+			cursoRepository.delete(curso);
+			System.out.println("El curso fue eliminado exitosamente");
+		} else {
+			System.out.println("El curso con ID " + id + " no fue encontrado");
 		}
 	}
 	
