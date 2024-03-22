@@ -26,15 +26,6 @@ public class Alumno {
 	@ManyToOne
 	@JoinColumn(name = "id_curso")
 	private Curso curso;
-	@Column(name = "id_curso", insertable = false, updatable = false)
-	
-	private int idCurso;public int getIdCurso() {
-		return idCurso;
-	}
-
-	public void setIdCurso(int idCurso) {
-		this.idCurso = idCurso;
-	}
 	
 	public Alumno() {
 		
