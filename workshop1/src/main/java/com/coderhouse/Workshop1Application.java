@@ -13,7 +13,7 @@ import com.coderhouse.entidades.Alumno;
 import com.coderhouse.entidades.Curso;
 import com.coderhouse.repositorios.AlumnoRepository;
 import com.coderhouse.repositorios.CursoRepository;
-
+//Spring
 @SpringBootApplication
 public class Workshop1Application implements CommandLineRunner {
 	
