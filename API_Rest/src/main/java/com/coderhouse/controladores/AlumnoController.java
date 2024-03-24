@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,4 +66,19 @@ public class AlumnoController {
 		}
 	}
 	
+	@PutMapping(value = "/{id}/modificar", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Alumno> modificarAlumnoPorDni(@PathVariable("id") int dni, @RequestBody Alumno nuevo) {
+		try {
+			Alumno alumno = alumnoRepository.findById(dni).orElse(null);
+			alumno.setNombre(nuevo.getNombre());
+			alumno.setApellido(nuevo.getApellido());
+			alumno.setDni(nuevo.getDni());
+			alumno.setLegajo(nuevo.getLegajo());
+			alumno.setCurso(nuevo.getCurso());
+			alumnoRepository.save(alumno);
+			return new ResponseEntity<>(alumno, HttpStatus.CREATED);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
