@@ -72,7 +72,7 @@ public class CursoController {
 			curso.setTitulo(nuevo.getTitulo());
 			curso.setDescripcion(nuevo.getDescripcion());
 			cursoRepository.save(curso);
-			return new ResponseEntity<>(curso, HttpStatus.CREATED);
+			return new ResponseEntity<>(curso, HttpStatus.OK);
 		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

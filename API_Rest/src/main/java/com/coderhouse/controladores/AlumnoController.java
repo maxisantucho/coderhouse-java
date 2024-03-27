@@ -76,7 +76,7 @@ public class AlumnoController {
 			alumno.setLegajo(nuevo.getLegajo());
 			alumno.setCurso(nuevo.getCurso());
 			alumnoRepository.save(alumno);
-			return new ResponseEntity<>(alumno, HttpStatus.CREATED);
+			return new ResponseEntity<>(alumno, HttpStatus.OK);
 		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
