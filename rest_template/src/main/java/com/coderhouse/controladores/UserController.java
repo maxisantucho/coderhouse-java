@@ -70,7 +70,7 @@ public class UserController {
 		try {
 			User user = userRestApi.getUserById(id);
 			if ( user != null) {
-				return new ResponseEntity<>(HttpStatus.OK);
+				return new ResponseEntity<>(user, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
